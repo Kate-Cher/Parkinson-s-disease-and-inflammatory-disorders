@@ -32,7 +32,7 @@ Other scripts (python and R) are not demanding on machine resources and can be r
 ## Data availability 
 
  Disease | Publication | Year | Journal | N cases | N controls | Sample size | GWAS link
- | ------------- |:-------------:| -----:| --------:| -------:| -------:| -------:| -------:|
+ | ------------- |:-----------:| -----:| ------:| -------:| -------:| -------:| -------:|
  Parkinson's disease | [Article](https://pubmed.ncbi.nlm.nih.gov/31701892/) | 2019 | Lancet | | |  482730 | [zip archive](https://drive.google.com/file/d/1FZ9UL99LAqyWnyNBxxlx6qOUlfAnublN/view)
  Celiac disease  | [Article](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2847618/) | 2010 | Nature Genetics | 4 533 | 10 750 | 15 283 | [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/DuboisPC_20190752_GCST000612)
  Rheumatoid arthritis | [Article](https://pubmed.ncbi.nlm.nih.gov/23143596/) | 2012 | Nature Genetics | 13 838 | 33 742 | 47 580 | [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/DuboisPC_20190752_GCST000612)
@@ -47,4 +47,38 @@ All preprocessed data are available at [GoogleDrive](https://drive.google.com/dr
 ## Materials and methods
 
 1. GWAS summary statistics were preprocessed using python [data_prep.py]() sript. 
-2. Parkinson's disease summary statistics had only chromosomal coordinates so we used `join` bash command to map it with [RSids]() of 1000 Genomes project.
+2. Parkinson's disease summary statistics had only chromosomal coordinates so we used `join` bash command to map it with [RSids](https://drive.google.com/file/d/1XkS8wpTmoBCEjnbm3ksdGT0s-5tIh9ot/view?usp=sharing) of 1000 Genomes project.
+3. Prepared GWAS summary statistics were also processed using [munge_sumstats.py](https://github.com/bulik/ldsc/blob/master/munge_sumstats.py) python script from [ldsc](https://github.com/bulik/ldsc) package to make [PLEIO](https://github.com/cuelee/pleio) scripts work with following command: `python munge_sumstats.py --sumstats <file_path> --N <sample_size> --N-cas <N_cases> --N-con <N_controls> --out <output_path> --snp variant_id`
+4. Genetic correlation, environmental covariance matrices and merged input for PLEIO were prepared using [ldsc_preprocess](https://github.com/cuelee/pleio/blob/master/ldsc_preprocess) from `PLEIO` 
+```bash
+python ./pleio --metain path/to/meta_input \ 
+  --sg path/to/env_corr_matrix \ 
+  --ce path/to/gen_cov_matrix \ 
+  --nis 100000 \ 
+  --parallel \ 
+  --create \ 
+  --out output/path
+```
+5. Results can be found at [output]()
+6. Preprocessed data were used to run [MTAG](https://github.com/JonJala/mtag) script as following: 
+```bash
+python mtag.py --sumstats path/to/input_list \
+--use_beta_se \
+--out ./path_to_output \ 
+--stream_stdout \ 
+--force
+```
+7. [Intersection script]() is used to identify differences in found snips from PLEIO and MTAG results. No differences were found.
+8. One of the significant coding snips from PLEIO result was rendered using [PleiotropyPlot](https://github.com/cuelee/pleiotropyPlot) package with [pleio_PD_plot.R] script
+
+## Results
+
+ - 247 pleiotropic loci were Identified using PLEIO
+ - 7 coding variants were found using [VEP](https://www.ensembl.org/Homo_sapiens/Tools/VEP)
+ - Effect of SNP in SPPCL2C (Intramembrane-cleaving aspartic protease (I-CLiP), which may be capable of cleaving type II membrane signal peptides in the hydrophobic membrane plane) was shown on PleiotropyPlot
+ - Inflammatory disorders are much more strongly correlated and their heritability is higher, but there is some correlation with Parkinson's disease as well
+
+## Future plans
+
+ - Expand the PLEIO analysis further by adding new GWAS summary statistics, and to check if this variants are also identified as significant and if we find any other SNPs
+ - Compare our approach with others such as Mendelian Randomisation to confirm or deny this variant significance
