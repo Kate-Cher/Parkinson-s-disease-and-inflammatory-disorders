@@ -46,7 +46,7 @@ All preprocessed data are available at [GoogleDrive](https://drive.google.com/dr
 
 ## Materials and methods
 
-1. GWAS summary statistics were preprocessed using python [data_prep.py]() sript. 
+1. GWAS summary statistics were preprocessed using python [data_prep.py](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/prep_python_scripts/data_prep.py) sript. 
 2. Parkinson's disease summary statistics had only chromosomal coordinates so we used `join` bash command to map it with [RSids](https://drive.google.com/file/d/1XkS8wpTmoBCEjnbm3ksdGT0s-5tIh9ot/view?usp=sharing) of 1000 Genomes project.
 3. Prepared GWAS summary statistics were also processed using [munge_sumstats.py](https://github.com/bulik/ldsc/blob/master/munge_sumstats.py) python script from [ldsc](https://github.com/bulik/ldsc) package to make [PLEIO](https://github.com/cuelee/pleio) scripts work with following command: `python munge_sumstats.py --sumstats <file_path> --N <sample_size> --N-cas <N_cases> --N-con <N_controls> --out <output_path> --snp variant_id`
 4. Genetic correlation, environmental covariance matrices and merged input for PLEIO were prepared using [ldsc_preprocess](https://github.com/cuelee/pleio/blob/master/ldsc_preprocess) from `PLEIO` 
@@ -59,7 +59,7 @@ python ./pleio --metain path/to/meta_input \
   --create \ 
   --out output/path
 ```
-5. Results can be found at [output]()
+5. Results can be found at [output](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/results/output.txt)
 6. Preprocessed data were used to run [MTAG](https://github.com/JonJala/mtag) script as following: 
 ```bash
 python mtag.py --sumstats path/to/input_list \
@@ -68,8 +68,8 @@ python mtag.py --sumstats path/to/input_list \
 --stream_stdout \ 
 --force
 ```
-7. [Intersection script]() is used to identify differences in found snips from PLEIO and MTAG results. No differences were found.
-8. One of the significant coding snips from PLEIO result was rendered using [PleiotropyPlot](https://github.com/cuelee/pleiotropyPlot) package with [pleio_PD_plot.R] script
+7. [Intersection script](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/prep_python_scripts/intersect.py) is used to identify differences in found snips from PLEIO and MTAG results. No differences were found.
+8. One of the significant coding snips from PLEIO result was rendered using [PleiotropyPlot](https://github.com/cuelee/pleiotropyPlot) package with [pleio_PD_plot.R](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/pleiotropy_plot/pleio_PD_plot.R) script
 
 ## Results
 
