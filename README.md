@@ -27,6 +27,12 @@ For running `PLEIO` and `MTAG` we used a server with following parameters:
  - 20 Gb RAM
  - 4 Cores & 8 Thread
 
+
+## Required programs
+
+ - Python version >3.7
+ - R version 4.0
+
 Other scripts (python and R) are not demanding on machine resources and can be run on any local computer.
 
 ## Data availability 
@@ -48,8 +54,10 @@ All preprocessed data are available at [GoogleDrive](https://drive.google.com/dr
 
 1. GWAS summary statistics were preprocessed using python [data_prep.py](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/prep_python_scripts/data_prep.py) sript. 
 2. Parkinson's disease summary statistics had only chromosomal coordinates so we used `join` bash command to map it with [RSids](https://drive.google.com/file/d/1XkS8wpTmoBCEjnbm3ksdGT0s-5tIh9ot/view?usp=sharing) of 1000 Genomes project.
-3. Prepared GWAS summary statistics were also processed using [munge_sumstats.py](https://github.com/bulik/ldsc/blob/master/munge_sumstats.py) python script from [ldsc](https://github.com/bulik/ldsc) package to make `PLEIO` scripts work with following command: `python munge_sumstats.py --sumstats <file_path> --N <sample_size> --N-cas <N_cases> --N-con <N_controls> --out <output_path> --snp variant_id`
-4. Genetic correlation, environmental covariance matrices and merged input for `PLEIO` were prepared using [ldsc_preprocess](https://github.com/cuelee/pleio/blob/master/ldsc_preprocess) from `PLEIO` 
+3. `PLEIO` was cloned from [repository](https://github.com/cuelee/pleio) and environment for it was created with conda, [base_environment.yml](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/envs/base_environment.yml) and bash command `conda env create -f base_environment.yml` and activated by `conda activate base_pleio` bash command. 
+4. `MTAG` was cloned from [repository](https://github.com/JonJala/mtag) and environment for it was created with conda, [mtag_environment.yml](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/envs/mtag_environment.yml) and bash command `conda env create -f mtag_environment.yml` and activated by `conda activate mtag` bash command.
+5. Prepared GWAS summary statistics were also processed using [munge_sumstats.py](https://github.com/bulik/ldsc/blob/master/munge_sumstats.py) python script from [ldsc](https://github.com/bulik/ldsc) package to make `PLEIO` scripts work with following command: `python munge_sumstats.py --sumstats <file_path> --N <sample_size> --N-cas <N_cases> --N-con <N_controls> --out <output_path> --snp variant_id`
+6. Genetic correlation, environmental covariance matrices and merged input for `PLEIO` were prepared using [ldsc_preprocess](https://github.com/cuelee/pleio/blob/master/ldsc_preprocess) from `PLEIO` 
 ```bash
 python ./pleio --metain path/to/meta_input \ 
   --sg path/to/env_corr_matrix \ 
