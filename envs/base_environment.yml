@@ -1,4 +1,4 @@
-name: pleio
+name: base
 channels:
   - defaults
 dependencies:
