@@ -27,13 +27,13 @@ For running `PLEIO` and `MTAG` we used a server with following parameters:
  - 20 Gb RAM
  - 4 Cores & 8 Thread
 
+Other scripts (python and R) are not demanding on machine resources and can be run on any local computer.
 
 ## Required programs
 
  - Python version >3.7
  - R version 4.0
 
-Other scripts (python and R) are not demanding on machine resources and can be run on any local computer.
 
 ## Data availability 
 
@@ -83,7 +83,8 @@ python mtag.py --sumstats path/to/input_list \
 
  - 247 pleiotropic loci were Identified using PLEIO
  - 7 coding variants were found using [VEP](https://www.ensembl.org/Homo_sapiens/Tools/VEP)
- - Effect of SNP in SPPCL2C (Intramembrane-cleaving aspartic protease (I-CLiP), which may be capable of cleaving type II membrane signal peptides in the hydrophobic membrane plane) was shown on PleiotropyPlot
+ - Effect of SNP in SPPCL2C (Intramembrane-cleaving aspartic protease (I-CLiP), which may be capable of cleaving type II membrane signal peptides in the hydrophobic membrane plane) was shown on PleiotropyPlot:
+ ![PleioPlot](https://github.com/Kate-Cher/Parkinson-s-disease-and-inflammatory-disorders/blob/main/pleiotropy_plot/rs12445568.jpg "PleoPlot")
  - Inflammatory disorders are much more strongly correlated and their heritability is higher, but there is some correlation with Parkinson's disease as well
 
 ## Future plans
